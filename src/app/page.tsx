@@ -2,7 +2,7 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div>
+    <div className='flex min-h-screen items-center justify-center'>
         Nikesh Code is Here 
     </div>
   )
