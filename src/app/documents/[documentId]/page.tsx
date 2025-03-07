@@ -1,4 +1,5 @@
 import Editor from "./editor";
+import ToolBar from "./ToolBar";
 
 
 interface DocumentIdPageProps {
@@ -11,7 +12,7 @@ const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
     return (
         <div className="him-h-screen bg-[#FAFBFD]">
             {/* DocumentIdPage: {documentId} */}
-
+            <ToolBar/>
             <Editor />
         </div>
     )
