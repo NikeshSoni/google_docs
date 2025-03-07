@@ -1,14 +1,15 @@
 'use client'
 
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import TaskItem from '@tiptap/extension-task-item'
-import TaskList from '@tiptap/extension-task-list'
-import Table from '@tiptap/extension-table'
-import TableCell from '@tiptap/extension-table-cell'
-import TableHeader from '@tiptap/extension-table-header'
-import TableRow from '@tiptap/extension-table-row'
-import Image from '@tiptap/extension-image'
+import TaskItem from '@tiptap/extension-task-item';
+import TaskList from '@tiptap/extension-task-list';
+import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
+import Image from '@tiptap/extension-image';
+import ImageResize from 'tiptap-extension-resize-image';
 
 const Editor = () => {
 
@@ -27,6 +28,7 @@ const Editor = () => {
             TableRow,
             TaskList,
             Image,
+            ImageResize,
             TaskItem.configure({
                 nested: true,
             }),],
