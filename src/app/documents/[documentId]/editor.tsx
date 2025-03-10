@@ -14,6 +14,8 @@ import Underline from '@tiptap/extension-underline';
 import { useEditorStore } from '@/store/use-editor-store';
 import FontFamily from '@tiptap/extension-font-family';
 import TextStyle from '@tiptap/extension-text-style';
+import { Color } from '@tiptap/extension-color';
+import Highlight from '@tiptap/extension-highlight';
 
 
 const Editor = () => {
@@ -52,6 +54,10 @@ const Editor = () => {
     },
     extensions: [
       StarterKit,
+      Color,
+      Highlight.configure(
+        { multicolor: true }
+      ),
       TextStyle,
       FontFamily,
       Underline,
