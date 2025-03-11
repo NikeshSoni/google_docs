@@ -14,7 +14,6 @@ import { Separator } from "@/components/ui/separator";
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { type Level } from "@tiptap/extension-heading";
@@ -186,7 +185,7 @@ const FontFamilyButton = () => {
     )
 }
 
-const ToolBarButton = ({ onClick, isActive, icon: Icon }: ToolbarButtonProps) => {
+const ToolBarButton = ({ onClick, isActive, icon: Icon }: ToolbarButtonProps) => {  
     return (
         <button onClick={onClick}>
             <Icon className={cn(
@@ -202,7 +201,7 @@ const ToolBar = () => {
     const { editor } = useEditorStore()
 
     const sections: {
-        lable: String;
+        lable: string;
         icon: LucideIcon;
         onClick: () => void;
         isActive?: boolean;
@@ -282,8 +281,8 @@ const ToolBar = () => {
 
     return (
         <div className='bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto'>
-            {sections[0].map((items) => (
-                <ToolBarButton key={items.lable} {...items} />
+            {sections[0].map((items , idx) => (
+                <ToolBarButton key={idx} {...items} />
             ))}
 
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
@@ -299,8 +298,8 @@ const ToolBar = () => {
 
             {/* TODO: Font Size */}
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-            {sections[1].map((items) => (
-                <ToolBarButton key={items.lable} {...items} />
+            {sections[1].map((items , idx) => (
+                <ToolBarButton key={idx} {...items} />
             ))}
 
             {/* TODO: Text Color */}
@@ -313,11 +312,9 @@ const ToolBar = () => {
             {/* TODO: Align */}
             {/* TODO: Line Height */}
             {/* TODO: List */}
-            {sections[2].map((items) => (
-                <ToolBarButton key={items.lable} {...items} />
+            {sections[2].map((items , idx) => (
+                <ToolBarButton key={idx} {...items} />
             ))}
-
-
         </div>
     )
 }

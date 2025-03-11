@@ -3,15 +3,14 @@ import ToolBar from "./ToolBar";
 
 
 interface DocumentIdPageProps {
-    params: Promise<{ documentId: String }>
+    params: Promise<{ documentId: string }>;
 }
 
-const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
-    const { documentId } = await params;
 
+const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
+     await params;
     return (
         <div className="him-h-screen bg-[#FAFBFD]">
-            {/* DocumentIdPage: {documentId} */}
             <ToolBar/>
             <Editor />
         </div>
