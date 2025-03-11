@@ -24,9 +24,6 @@ interface ToolbarButtonProps {
     icon: LucideIcon;
 }
 
-
-
-
 const HighlightColorButton = () => {
     const { editor } = useEditorStore()
     const value = editor?.getAttributes("highlight").color || "#FFFFFF";
@@ -48,14 +45,10 @@ const HighlightColorButton = () => {
             </DropdownMenuContent>
         </DropdownMenu>
     )
-
 }
-
 
 const TextColorButton = () => {
     const { editor } = useEditorStore()
-
-
     const value = editor?.getAttributes("textStyle").color || "#000000";
 
     const onChange = (color: ColorResult) => {
