@@ -1,11 +1,9 @@
 import Editor from "./editor";
 import ToolBar from "./ToolBar";
 
-
 interface DocumentIdPageProps {
     params: Promise<{ documentId: string }>;
 }
-
 
 const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
      await params;
