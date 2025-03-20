@@ -7,6 +7,7 @@ import {
     AlignRightIcon,
     BoldIcon, ChevronDownIcon, HighlighterIcon, ImageIcon, ItalicIcon,
     Link2Icon,
+    ListCollapseIcon,
     ListIcon,
     ListOrderedIcon,
     ListTodoIcon, LucideIcon,
@@ -44,6 +45,57 @@ interface ToolbarButtonProps {
     isActive?: boolean;
     icon: LucideIcon;
 }
+
+const LineHeightButton = () => {
+    const { editor } = useEditorStore()
+
+    const lineHeights = [
+        {
+            label: "Default",
+            value: "normal"
+        },
+        {
+            label: "Single",
+            value: "1"
+        },
+        {
+            label: "1.5",
+            value: "1.5"
+        },
+        {
+            label: "Double",
+            value: "2"
+        },
+    ]
+
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <button
+                    className="h-7 min-w-7 mx-1 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
+                    <ListCollapseIcon className="size-6" />
+                </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="p-1 flex flex-col gap-y-1 ">
+                {lineHeights.map(({ label, value }) => {
+                    return (
+                        <Button key={value}
+                            onClick={() => editor?.chain().focus().setLingHeight(value).run()}
+                            className={cn(
+                                "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-netural-200/80",
+                                editor?.getAttributes("paragraph").lineHeight === value && "bg-netural-200/80"
+                            )}
+                        >
+                            {/* <Icon className="size-4" /> */}
+                            <span className="text-sm">{label}</span>
+                        </Button>
+                    )
+                })}
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
+}
+
 
 const FontSizeButton = () => {
     const { editor } = useEditorStore()
@@ -567,7 +619,6 @@ const ToolBar = () => {
                     onClick: () => editor?.chain().focus().toggleUnderline().run(),
                 },
             ],
-
             // index section [2]
             [
                 {
@@ -594,11 +645,9 @@ const ToolBar = () => {
     return (
         <div className='bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto'>
             {sections[0].map((items, idx) => (
-
                 <div className="mx-1">
                     <ToolBarButton key={idx} {...items} />
                 </div>
-
             ))}
 
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
@@ -634,6 +683,7 @@ const ToolBar = () => {
             {/* TODO: Align */}
             <AlignButton />
             {/* TODO: Line Height */}
+            <LineHeightButton />
             {/* TODO: List */}
             <ListButton />
 

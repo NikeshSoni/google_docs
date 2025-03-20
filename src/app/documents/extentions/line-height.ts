@@ -50,11 +50,27 @@ export const LingHeightExtension = Extension.create({
                 tr = tr.setSelection(selection);
 
                 const { from, to } = selection;
-                state.doc.nodesBetween(from, to, (node, post) => {
+                state.doc.nodesBetween(from, to, (node, pos) => {
                     if (this.options.types.includes(node.type.name)) {
                         tr = tr.setNodeMarkup(pos, undefined, {
                             ...node.attrs,
                             lineHeight,
+                        })
+                    }
+                })
+                if (dispatch) dispatch(tr)
+                return true;
+            },
+            unsetLingHeight: () => ({ tr, state, dispatch }) => {
+                const { selection } = state;
+                tr = tr.setSelection(selection);
+                const { from, to } = selection;
+
+                state.doc.nodesBetween(from, to, (node, pos) => {
+                    if (this.options.types.includes(node.type.name)) {
+                        tr = tr.setNodeMarkup(pos, undefined, {
+                            ...node.attrs,
+                            lineHeight: this.options.defaultLineHeight
                         })
                     }
                 })
