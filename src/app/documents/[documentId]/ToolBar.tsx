@@ -96,7 +96,6 @@ const LineHeightButton = () => {
     )
 }
 
-
 const FontSizeButton = () => {
     const { editor } = useEditorStore()
 
@@ -162,7 +161,7 @@ const FontSizeButton = () => {
                     onChange={handleInputChange}
                     onBlur={handleInputBlur}
                     onKeyDown={handleKeyDown}
-                    className="h-7 w-11 text-sm border border-neutral-400 text-center rounded-sm bg-transparent hover:bg-neutral-200/80"
+                    className="h-7 w-10 text-sm border border-neutral-400 text-center rounded-sm bg-transparent hover:bg-neutral-200/80"
                 />
             ) : (
                 <button
@@ -170,7 +169,7 @@ const FontSizeButton = () => {
                         setIsEditing(true);
                         setFontSize(currentFontSize)
                     }}
-                    className="h-7 w-13 text-sm border border-neutral-400 text-center rounded-sm bg-transparent cursor-text">
+                    className="h-7 w-10 text-sm border border-neutral-400 text-center rounded-sm bg-transparent cursor-text">
                     {currentFontSize}
                 </button>
             )}
