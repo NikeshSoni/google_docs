@@ -63,8 +63,8 @@ export const Ruler = () => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      className='h-9 border-b border-gray-300 flex items-end relative select-none print:hidden'>
-      <div id='ruler-container' className="max-w-[816px] mx-auto w-full h-full relative">
+      className='w-[816px] mx-auto h-9 border-b border-gray-300 flex items-end relative select-none print:hidden'>
+      <div id='ruler-container' className="w-full h-full relative">
         <Marker
           position={leftMargin}
           isLeft={true}
@@ -104,13 +104,11 @@ export const Ruler = () => {
                   {marker % 5 !== 0 && (
                     <div className='absolute bottom-0 w-[1px] h-1 bg-neutral-500' />
                   )}
-
                 </div>
               )
             })}
           </div>
         </div>
-
       </div>
     </div>
   )
@@ -131,6 +129,7 @@ const Marker = ({ position, isLeft, isDragging, onMouseDown, onDoubleClick }: Ma
       style={{ [isLeft ? "left" : "right"]: `${position}px` }}
       onMouseDown={onMouseDown}
       onDoubleClick={onDoubleClick}
+
     >
       <FaCaretDown className='absolute left-1/2 top-0 h-full fill-blue-500 transform -translate-x-1/2 ' />
     </div>
