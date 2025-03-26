@@ -12,7 +12,6 @@ export const Ruler = () => {
   const [isDraggingRight, setIsDraggingRight] = useState(false)
 
   const rulerRef = useRef<HTMLDivElement>(null);
-
   const handleLeftMouseDown = () => {
     setIsDraggingLeft(true)
   }
@@ -23,21 +22,23 @@ export const Ruler = () => {
 
   const handleMouseMove = (e: React.MouseEvent) => {
 
+    const Page_width = 816;
+    const minSpace = 100;
+
     if ((isDraggingLeft || isDraggingRight) && rulerRef.current) {
       const continer = rulerRef.current.querySelector("#ruler-container");
 
       if (continer) {
         const containerRect = continer.getBoundingClientRect();
         const relativeX = e.clientX - containerRect.left;
-        const rawPosition = Math.max(0, Math.min(816, relativeX));
-
+        const rawPosition = Math.max(0, Math.min(Page_width, relativeX));
         if (isDraggingLeft) {
-          const maxLeftPosition = 816 - rightMargin - 100;
+          const maxLeftPosition = Page_width - rightMargin - minSpace;
           const newLeftPosition = Math.min(rawPosition, maxLeftPosition)
           setLeftMargin(newLeftPosition)
         } else if (isDraggingRight) {
-          const maxRightPosition = 816 - (leftMargin + 100);
-          const newRightPosition = Math.min(816 - rawPosition, maxRightPosition);
+          const maxRightPosition = Page_width - (leftMargin + minSpace);
+          const newRightPosition = Math.min(Page_width - rawPosition, maxRightPosition);
           setRightMargin(newRightPosition);
         }
       }
@@ -129,9 +130,17 @@ const Marker = ({ position, isLeft, isDragging, onMouseDown, onDoubleClick }: Ma
       style={{ [isLeft ? "left" : "right"]: `${position}px` }}
       onMouseDown={onMouseDown}
       onDoubleClick={onDoubleClick}
-
     >
       <FaCaretDown className='absolute left-1/2 top-0 h-full fill-blue-500 transform -translate-x-1/2 ' />
+      <div className='absolute left-1/2 top-4 transform -translate-x-1/2'
+        style={{
+          height: "100vh",
+          width: "1px",
+          transform: "scaleX(0.5)",
+          backgroundColor: "#3b72f6",
+          display: isDragging ? "block" : "none",
+        }}
+      />
     </div>
   )
 }
