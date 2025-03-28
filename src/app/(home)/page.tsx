@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Navbar } from './navbar';
+import { TamplateGallery } from './template-gallery';
 
 const Home = () => {
   return (
@@ -10,10 +11,10 @@ const Home = () => {
       </div>
 
       <div className='mt-16'>
-        Click <Link href="/documents/123">Here</Link>Go to Document Id
+          <TamplateGallery />
       </div>
     </div>
   )
 }
 
-export default Home
+export default Home;
