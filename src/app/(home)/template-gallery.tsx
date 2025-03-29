@@ -10,9 +10,6 @@ import {
 } from '@/components/ui/carousel';
 import { tamplate } from '@/constant/tamplates';
 
-
-// const tamplate = [{ id: "blank", lable: "Blank Document", imageUrl: "./logo.svg" }]
-
 export const TamplateGallery = () => {
 
     const isCreating = false;
@@ -34,19 +31,11 @@ export const TamplateGallery = () => {
                                         "aspect-3/4 flex flex-col gap-y-2.5",
                                         isCreating && "pointer-events-none opacity-50"
                                     )}>
-                                        <button
-                                            disabled={isCreating}
-                                            onClick={() => { }}
-                                            style={{
-                                                backgroundImage: `url(${tamplate.imageUrl})`,
-                                                backgroundSize: "contain",
-                                                backgroundPosition: "center",
-                                                backgroundRepeat: "no-repeat"
-                                            }}
-                                            className='size-full hover:border-blue-500 rounded-sm border hover:bg-blue-50
-                                            transition flex flex-col items-center justify-center gap-y-4 bg-white'
-                                        >
-                                        </button>
+                                        <div
+                                            onClick={() => { }}>
+                                            <img className='size-full  hover:border-blue-500 rounded-sm border hover:bg-blue-50
+                                            transition flex flex-col items-center justify-center gap-y-4 bg-white' src={tamplate.imageUrl} />
+                                        </div>
                                         <p className='text-sm font-medium truncate'>
                                             {tamplate.lable}
                                         </p>
@@ -55,6 +44,10 @@ export const TamplateGallery = () => {
                             )
                         })}
                     </CarouselContent>
+
+                    <CarouselPrevious />
+                    <CarouselNext />
+
                 </Carousel>
             </div>
         </div>
