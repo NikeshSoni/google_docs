@@ -1,5 +1,8 @@
 "use client"
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useMutation } from 'convex/react';
+
 import { cn } from "@/lib/utils";
 import {
     Carousel,
@@ -9,10 +12,26 @@ import {
     CarouselPrevious
 } from '@/components/ui/carousel';
 import { tamplate } from '@/constant/tamplates';
+import { api } from '../../../convex/_generated/api';
+
 
 export const TamplateGallery = () => {
 
-    const isCreating = false;
+    // const isCreating = false;
+    const router = useRouter();
+    const create = useMutation(api.documents.create)
+
+    const [isCreating, setIsCreating] = useState(false);
+
+    const onTamplateClick = (title: string, initialContent: string) => {
+        setIsCreating(true);
+        create({ title, initialContent })
+            .then((documentId) => {
+                router.push(`/documents/${documentId}`)
+            }).finally(() => {
+                setIsCreating(false)
+            })
+    }
 
     return (
         <div className='bg-[#F1F3F4]'>
@@ -31,9 +50,10 @@ export const TamplateGallery = () => {
                                         "aspect-3/4 flex flex-col gap-y-2.5",
                                         isCreating && "pointer-events-none opacity-50"
                                     )}>
-                                        <div
-                                            onClick={() => { }}>
-                                            <img className='size-full  hover:border-blue-500 rounded-sm border hover:bg-blue-50
+                                        <div>
+                                           {/* Todo: Add proper Initial content */}
+                                            <img onClick={() => onTamplateClick(tamplate.lable, "")}
+                                                className='size-full  hover:border-blue-500 rounded-sm border hover:bg-blue-50
                                             transition flex flex-col items-center justify-center gap-y-4 bg-white' src={tamplate.imageUrl} />
                                         </div>
                                         <p className='text-sm font-medium truncate'>

@@ -2,9 +2,10 @@
 import React from 'react'
 import { Navbar } from './navbar';
 import { TamplateGallery } from './template-gallery';
-import { useQuery } from 'convex/react';
+import { usePaginatedQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { Id } from '../../../convex/_generated/dataModel';
+import { DocumentsTable } from './documents-table';
 
 interface Document {
   _id: Id<"documents">;
@@ -13,11 +14,9 @@ interface Document {
 }
 
 const Home = () => {
-  const documents = useQuery(api.documents.get);
-
-  if (documents === undefined) {
-    return <p>Loading...</p>
-  }
+  //  if i want to add more arguments thats why 
+  // i mention below {} mt object its mendetory
+  const { results, status, loadMore } = usePaginatedQuery(api.documents.get, {}, { initialNumItems: 5 });
 
   return (
     <div className='min-h-screen flex flex-col '>
@@ -28,13 +27,14 @@ const Home = () => {
       <div className='mt-16'>
         <TamplateGallery />
 
-        {documents?.map((document: Document) => {
-          return (
-            <div key={document._id}>
-              <span>{document.title}</span>
-            </div>
-          )
-        })}
+
+        <DocumentsTable
+          documents={results}
+          loadMore={loadMore}
+          status={status}
+        />
+
+      
       </div>
     </div>
   )
