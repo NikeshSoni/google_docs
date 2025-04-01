@@ -28,8 +28,8 @@ export const DocumentsTable = ({ documents, loadMore, status }: DocumentsTablePr
                         <TableRow>
                             <TableHead>Name</TableHead>
                             <TableHead>&nbsp;</TableHead>
-                            <TableHead>Shared</TableHead>
-                            <TableHead>Created At</TableHead>
+                            <TableHead className="hidden md:table-cell">Shared</TableHead>
+                            <TableHead className="hidden md:table-cell">Created At</TableHead>
                         </TableRow>
                     </TableHeader>
 

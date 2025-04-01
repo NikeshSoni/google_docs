@@ -1,20 +1,23 @@
 import { Doc } from "../../../convex/_generated/dataModel";
-import { PaginationStatus } from "convex/react";
 import { SiGoogledocs } from "react-icons/si";
 import { format } from "date-fns";
 
 import {
-    Table, TableBody,
-    TableCell, TableHead,
-    TableHeader, TableRow
+    TableCell, TableRow
 } from "@/components/ui/table";
 import { Building2Icon, CircleUserIcon } from "lucide-react";
+import { DocumentMenu } from "./document-menu";
 
 interface DocumentRowProps {
     document: Doc<"documents">;
 }
 
 export const DocumentRow = ({ document }: DocumentRowProps) => {
+
+    const onNewTabClick = (id: string) => {
+        window.open(`/documents/${id}`, "_blank")
+    }
+
     return (
         <TableRow className="cursor-pointer">
             <TableCell className="w-[50px]">
@@ -32,7 +35,15 @@ export const DocumentRow = ({ document }: DocumentRowProps) => {
                 {document.organizationId ? "Organization" : "Personal"}
             </TableCell>
             <TableCell className="text-muted-foreground hidden md:table-cell">
+                {format(new Date(document._creationTime), "MMM , dd, yyyy")}
+            </TableCell>
 
+            <TableCell className="flex justify-end">
+                <DocumentMenu
+                    documentId={document._id}
+                    title={document.title}
+                    onNewTab={onNewTabClick}
+                />
             </TableCell>
         </TableRow>
     )
