@@ -28,3 +28,28 @@ export const get = query({
     return await ctx.db.query("documents").paginate(args.paginationOpts);
   },
 });
+
+export const removeById = mutation({
+  args: { id: v.id("documents") },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) {
+      throw new ConvexError("Unathorized")
+    }
+
+    const document = await ctx.db.get(args.id);
+
+    if (!document) {
+      throw new ConvexError("Document fot found");
+    }
+
+    const isOwner = document.ownerId === user.subject;
+
+    if (!isOwner) {
+      throw new ConvexError("Unathorized");
+    }
+
+    return await ctx.db.delete(args.id)
+  }
+})
