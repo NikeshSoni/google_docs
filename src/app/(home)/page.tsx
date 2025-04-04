@@ -6,6 +6,7 @@ import { usePaginatedQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { Id } from '../../../convex/_generated/dataModel';
 import { DocumentsTable } from './documents-table';
+import { useSearchParam } from '@/hooks/use-search-params';
 
 interface Document {
   _id: Id<"documents">;
@@ -14,9 +15,13 @@ interface Document {
 }
 
 const Home = () => {
+
+  const [search] = useSearchParam()
+
   //  if i want to add more arguments thats why 
   // i mention below {} mt object its mendetory
-  const { results, status, loadMore } = usePaginatedQuery(api.documents.get, {}, { initialNumItems: 5 });
+  const { results, status, loadMore } = usePaginatedQuery(api.documents.get, { search }, { initialNumItems: 5 });
+
 
   return (
     <div className='min-h-screen flex flex-col '>
@@ -34,7 +39,7 @@ const Home = () => {
           status={status}
         />
 
-      
+
       </div>
     </div>
   )
