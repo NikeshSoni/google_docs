@@ -263,9 +263,7 @@ const Navbar = () => {
 
 
             </nav>
-
             <div className="flex gap-3 items-center">
-
                 <OrganizationSwitcher
                     afterCreateOrganizationUrl='/'
                     afterLeaveOrganizationUrl='/'
