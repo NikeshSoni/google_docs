@@ -644,9 +644,7 @@ const ToolBar = () => {
     return (
         <div className='bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto'>
             {sections[0].map((items, idx) => (
-                <div className="mx-1">
-                    <ToolBarButton key={idx} {...items} />
-                </div>
+                <ToolBarButton key={idx} {...items} />
             ))}
 
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
@@ -665,9 +663,7 @@ const ToolBar = () => {
             <FontSizeButton />
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
             {sections[1].map((items, idx) => (
-                <div className="mx-1">
-                    <ToolBarButton key={idx} {...items} />
-                </div>
+                <ToolBarButton key={idx} {...items} />
             ))}
 
             {/* TODO: Text Color */}
@@ -687,9 +683,7 @@ const ToolBar = () => {
             <ListButton />
 
             {sections[2].map((items, idx) => (
-                <div className="mx-1">
-                    <ToolBarButton key={idx} {...items} />
-                </div>
+                <ToolBarButton key={idx} {...items} />
             ))}
         </div>
     )
