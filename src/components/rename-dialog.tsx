@@ -15,6 +15,7 @@ import {
 } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { toast } from "sonner";
 
 
 interface renameDialogProps {
@@ -37,7 +38,27 @@ export const RenameDialog = ({ documentId, initialTitle, children }: renameDialo
         setIsUpdating(true);
 
         update({ id: documentId, title: title.trim() || "Untitled" })
-            .then(() => setOpen(false))
+            .catch(() =>
+                toast.error("Something went wrong", {
+                    style: {
+                        backgroundColor: '#f87171',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        borderRadius: '8px',
+                        padding: '16px',
+                    },
+                    icon: "⚠️",
+                })).then(() =>
+                    toast.success("Successfully Renamed!", {
+                        style: {
+                            backgroundColor: '#4ade80', // Tailwind green-400
+                            color: '#fff',
+                            fontWeight: 'bold',
+                            borderRadius: '8px',
+                            padding: '16px',
+                        },
+                        icon: "✅",
+                    }))
             .finally(() => {
                 setIsUpdating(false);
             })

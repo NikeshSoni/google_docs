@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/carousel';
 import { tamplate } from '@/constant/tamplates';
 import { api } from '../../../convex/_generated/api';
+import { toast } from 'sonner';
 
 
 export const TamplateGallery = () => {
@@ -26,7 +27,28 @@ export const TamplateGallery = () => {
     const onTamplateClick = (title: string, initialContent: string) => {
         setIsCreating(true);
         create({ title, initialContent })
+            .catch(() =>
+                toast.error("Something went wrong", {
+                    style: {
+                        backgroundColor: '#f87171',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        borderRadius: '8px',
+                        padding: '16px',
+                    },
+                    icon: "⚠️",
+                }))
             .then((documentId) => {
+                toast.success("Successfully Added Document", {
+                    style: {
+                        backgroundColor: '#4ade80',
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        borderRadius: '8px',
+                        padding: '16px',
+                    },
+                    icon: "✅",
+                })
                 router.push(`/documents/${documentId}`)
             }).finally(() => {
                 setIsCreating(false)
@@ -51,7 +73,7 @@ export const TamplateGallery = () => {
                                         isCreating && "pointer-events-none opacity-50"
                                     )}>
                                         <div>
-                                           {/* Todo: Add proper Initial content */}
+                                            {/* Todo: Add proper Initial content */}
                                             <img onClick={() => onTamplateClick(tamplate.lable, "")}
                                                 className='size-full  hover:border-blue-500 rounded-sm border hover:bg-blue-50
                                             transition flex flex-col items-center justify-center gap-y-4 bg-white' src={tamplate.imageUrl} />

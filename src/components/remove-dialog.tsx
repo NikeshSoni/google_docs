@@ -1,5 +1,6 @@
 "use client"
 import { useMutation } from "convex/react";
+import { toast } from "sonner";
 
 import {
     AlertDialog,
@@ -54,6 +55,27 @@ export const RemoveDialog = ({ documentId, children }: removeDialogProps) => {
                             e.stopPropagation();
                             setIsRemoving(true);
                             await remove({ id: documentId })
+                                .catch(() =>
+                                    toast.error("Something went wrong", {
+                                        style: {
+                                            backgroundColor: '#f87171',
+                                            color: 'white',
+                                            fontWeight: 'bold',
+                                            borderRadius: '8px',
+                                            padding: '16px',
+                                        },
+                                        icon: "⚠️",
+                                    })).then(() =>
+                                        toast.success("Successfully created!", {
+                                            style: {
+                                                backgroundColor: '#4ade80', // Tailwind green-400
+                                                color: '#fff',
+                                                fontWeight: 'bold',
+                                                borderRadius: '8px',
+                                                padding: '16px',
+                                            },
+                                            icon: "✅",
+                                        }))
                                 .finally(() => setIsRemoving(false));
                         }}
                     >
