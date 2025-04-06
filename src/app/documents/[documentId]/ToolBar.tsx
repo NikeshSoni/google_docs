@@ -642,50 +642,57 @@ const ToolBar = () => {
         ];
 
     return (
-        <div className='bg-[#F1F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 overflow-x-auto'>
-            {sections[0].map((items, idx) => (
-                <ToolBarButton key={idx} {...items} />
-            ))}
+        <div className="bg-[#F1F4F9] px-4 py-2 rounded-2xl min-h-[48px] flex items-center gap-x-2 overflow-x-auto shadow-sm">
+            {/* Left Section */}
+            <div className="flex items-center gap-x-2">
+                {sections[0].map((items, idx) => (
+                    <ToolBarButton key={idx} {...items} />
+                ))}
+            </div>
 
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
 
-            {/* TODO: font family  */}
+            {/* Font Section */}
+            <div className="flex items-center gap-x-2">
+                <FontFamilyButton />
+                <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+                <HeadingLevelButton />
+                <Separator orientation="vertical" className="h-6 bg-neutral-300" />
+                <FontSizeButton />
+            </div>
 
-            <FontFamilyButton />
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
 
-            {/* TODO: Heading  */}
-            <HeadingLevelButton />
+            {/* Styling Buttons */}
+            <div className="flex items-center gap-x-2">
+                {sections[1].map((items, idx) => (
+                    <ToolBarButton key={idx} {...items} />
+                ))}
+                <TextColorButton />
+                <HighlightColorButton />
+            </div>
+
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
 
-            {/* TODO: Font Size */}
+            {/* Additional Options */}
+            <div className="flex items-center gap-x-2">
+                <LinkButton />
+                <ImageButton />
+                <AlignButton />
+                <LineHeightButton />
+                <ListButton />
+            </div>
 
-            <FontSizeButton />
             <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-            {sections[1].map((items, idx) => (
-                <ToolBarButton key={idx} {...items} />
-            ))}
 
-            {/* TODO: Text Color */}
-            <TextColorButton />
-            {/* TODO: Highlight Color */}
-            <HighlightColorButton />
-            <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-            {/* TODO: Link */}
-            <LinkButton />
-            {/* TODO: Image */}
-            <ImageButton />
-            {/* TODO: Align */}
-            <AlignButton />
-            {/* TODO: Line Height */}
-            <LineHeightButton />
-            {/* TODO: List */}
-            <ListButton />
-
-            {sections[2].map((items, idx) => (
-                <ToolBarButton key={idx} {...items} />
-            ))}
+            {/* Right Section */}
+            <div className="flex items-center gap-x-2">
+                {sections[2].map((items, idx) => (
+                    <ToolBarButton key={idx} {...items} />
+                ))}
+            </div>
         </div>
+
     )
 }
 
