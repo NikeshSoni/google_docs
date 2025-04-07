@@ -1,7 +1,28 @@
 import { ConvexError, v } from "convex/values"
 import { mutation, query } from "./_generated/server";
 import { paginationOptsValidator } from "convex/server";
-import { log } from "node:console";
+
+export const getByIds = query({
+  args: { ids: v.array(v.id("documents")) },
+  handler: async (ctx, { ids }) => {
+    const documents = [];
+
+    for (const id of ids) {
+      const document = await ctx.db.get(id);
+
+      console.log(document , "document")
+
+      if (document) {
+        documents.push({ id: document._id, name: document.title });
+      } else {
+        documents.push({ id, name: "Removed" });
+      }
+    }
+
+    return documents;
+  },
+});
+
 
 
 export const create = mutation({
@@ -9,15 +30,11 @@ export const create = mutation({
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
 
-
-
     if (!user) {
       throw new ConvexError("Unathorized")
     }
 
     const organizationId = (user.organization_id ?? undefined) as | string | undefined;
-
-
     return await ctx.db.insert("documents", {
       title: args.title ?? "Untitled Document",
       ownerId: user.subject,
@@ -94,7 +111,7 @@ export const removeById = mutation({
     const isOwner = document.ownerId === user.subject;
     // const isOrganizationMember = document.organizationId === organizationId;
     const isOrganizationMember =
-    !!(document.organizationId && document.organizationId === organizationId);
+      !!(document.organizationId && document.organizationId === organizationId);
 
     if (!isOwner && !isOrganizationMember) {
       throw new ConvexError("Unathorized");
@@ -128,7 +145,7 @@ export const updateById = mutation({
     const isOwner = document.ownerId === user.subject;
 
     const isOrganizationMember =
-            !!(document.organizationId && document.organizationId === organizationId);
+      !!(document.organizationId && document.organizationId === organizationId);
 
     if (!isOwner && !isOrganizationMember) {
       throw new ConvexError("Unathorized");

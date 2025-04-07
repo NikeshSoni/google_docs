@@ -8,7 +8,8 @@ import {
 } from "@liveblocks/react/suspense";
 import { useParams } from "next/navigation";
 import { FullScreenLoder } from "@/components/full-screen-loder";
-import { getUsers } from "./action";
+import { Id } from "../../../../convex/_generated/dataModel";
+import { getUsers, getDocuments } from "./action";
 import { toast } from "sonner";
 
 
@@ -43,7 +44,16 @@ export function Room({ children }: { children: ReactNode }) {
     return (
         <LiveblocksProvider
             throttle={16}
-            authEndpoint="/api/liveblocks-auths"
+            authEndpoint={async () => {
+                const endPoint = "/api/liveblocks-auths";
+                const room = params.documentId as string;
+
+                const responce = await fetch(endPoint, {
+                    method: "POST",
+                    body: JSON.stringify({ room })
+                })
+                return await responce.json()
+            }}
             resolveUsers={({ userIds }) => {
                 return userIds.map(
                     (userId) => users.find((user) => user.id === userId) ?? undefined
@@ -54,13 +64,19 @@ export function Room({ children }: { children: ReactNode }) {
 
                 if (text) {
                     filteredUsers = users.filter((user) =>
-                         user.name.toLowerCase().includes(text.toLowerCase())
+                        user.name.toLowerCase().includes(text.toLowerCase())
                     );
                 }
 
-                return filteredUsers.map( (user) => user.id)
+                return filteredUsers.map((user) => user.id)
             }}
-            resolveRoomsInfo={() => []}
+            resolveRoomsInfo={async ({ roomIds }) => {
+                const documents = await getDocuments(roomIds as Id<"documents">[]);
+                return documents.map((document) => ({
+                    id: document.id,
+                    name: document.name,
+                }))
+            }}
         >
             <RoomProvider id={params.documentId as string}>
                 <ClientSideSuspense fallback={<FullScreenLoder label="Room Leading..." />}>

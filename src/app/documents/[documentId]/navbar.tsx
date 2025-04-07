@@ -30,6 +30,9 @@ import {
     MenubarSubTrigger, MenubarTrigger
 } from '@/components/ui/menubar';
 
+import { Avatars } from './avatar';
+import { Inbox } from './inbox';
+
 const Navbar = () => {
 
 
@@ -264,6 +267,8 @@ const Navbar = () => {
 
             </nav>
             <div className="flex gap-3 items-center">
+                <Avatars />
+                <Inbox />
                 <OrganizationSwitcher
                     afterCreateOrganizationUrl='/'
                     afterLeaveOrganizationUrl='/'
