@@ -1,14 +1,16 @@
+import { Preloaded } from "convex/react";
 import Editor from "./editor";
 import Navbar from "./navbar";
 import { Room } from "./room";
 import ToolBar from "./ToolBar";
+import { api } from "../../../../convex/_generated/api";
 
-interface DocumentIdPageProps {
-    params: Promise<{ documentId: string }>;
+interface DocumentProps {
+    preloadedDocument: Preloaded<typeof api.documents.getById>
 }
 
-const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
-    await params;
+export const Document = async ({ DocumentProps }: DocumentProps) => {
+
     return (
         <Room>
             <div className="him-h-screen bg-[#FAFBFD]">
@@ -23,5 +25,3 @@ const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
         </Room>
     )
 }
-
-export default DocumentIdPage
