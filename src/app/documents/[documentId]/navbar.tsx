@@ -32,8 +32,13 @@ import {
 
 import { Avatars } from './avatar';
 import { Inbox } from './inbox';
+import { Doc } from '../../../../convex/_generated/dataModel';
 
-const Navbar = () => {
+interface NavbarProps {
+    data: Doc<"documents">
+}
+
+const Navbar = ({ data }: NavbarProps) => {
 
 
     const { editor } = useEditorStore();
@@ -62,7 +67,7 @@ const Navbar = () => {
                 type: "application/json",
             });
 
-        onDownload(blob, "document.json") // todo use document name 
+        onDownload(blob, `${data.title}.json`); 
     }
 
 
@@ -74,7 +79,7 @@ const Navbar = () => {
             type: "text/html",
         });
 
-        onDownload(blob, "document.html") // todo use document name 
+        onDownload(blob, `${data.title}.html`)
     }
 
     const onSaveText = () => {
@@ -85,7 +90,7 @@ const Navbar = () => {
             type: "text/plain",
         });
 
-        onDownload(blob, "document.txt") // todo use document name 
+        onDownload(blob, `${data.title}.txt`)  
     }
 
     return (
@@ -99,7 +104,7 @@ const Navbar = () => {
                 </div>
                 <div className="flex flex-col">
 
-                    <DocumentInput />
+                    <DocumentInput title={data.title} id={data._id} />
                     <div className="flex">
                         <Menubar className='border-none bg-transparent shadow-none h-auto p-0'>
 
