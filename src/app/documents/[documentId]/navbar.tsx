@@ -33,6 +33,10 @@ import {
 import { Avatars } from './avatar';
 import { Inbox } from './inbox';
 import { Doc } from '../../../../convex/_generated/dataModel';
+import { useMutation } from 'convex/react';
+import { api } from '../../../../convex/_generated/api';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 interface NavbarProps {
     data: Doc<"documents">
@@ -40,8 +44,39 @@ interface NavbarProps {
 
 const Navbar = ({ data }: NavbarProps) => {
 
+    const router = useRouter();
 
     const { editor } = useEditorStore();
+
+    const mutation = useMutation(api.documents.create);
+
+    const onNewDocument = () => {
+        mutation({
+            title: "Untitled document",
+            initialContent: ""
+        }).catch(() => toast.error("Something went wrong", {
+            style: {
+                backgroundColor: '#f87171',
+                color: 'white',
+                fontWeight: 'bold',
+                borderRadius: '8px',
+                padding: '16px',
+            },
+            icon: "⚠️",
+        })).then((id) => {
+                toast.success("Document Created", {
+                    style: {
+                        backgroundColor: '#4ade80',
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        borderRadius: '8px',
+                        padding: '16px',
+                    },
+                    icon: "✅",
+                })
+                router.push(`/documents/${id}`)
+            })
+    }
 
     const insertTable = ({ rows, cols }: { rows: number, cols: number }) => {
         editor?.chain()
@@ -67,7 +102,7 @@ const Navbar = ({ data }: NavbarProps) => {
                 type: "application/json",
             });
 
-        onDownload(blob, `${data.title}.json`); 
+        onDownload(blob, `${data.title}.json`);
     }
 
 
@@ -90,7 +125,7 @@ const Navbar = ({ data }: NavbarProps) => {
             type: "text/plain",
         });
 
-        onDownload(blob, `${data.title}.txt`)  
+        onDownload(blob, `${data.title}.txt`)
     }
 
     return (
@@ -138,7 +173,7 @@ const Navbar = ({ data }: NavbarProps) => {
                                         </MenubarSubContent>
                                     </MenubarSub>
 
-                                    <MenubarItem>
+                                    <MenubarItem onClick={onNewDocument}>
                                         <FilePlusIcon className='size-4 mr-2' />
                                         New Document
                                     </MenubarItem>
