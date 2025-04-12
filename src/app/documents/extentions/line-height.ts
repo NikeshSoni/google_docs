@@ -1,5 +1,5 @@
 
-import { Extension, getAttributes } from "@tiptap/react";
+import { Extension} from "@tiptap/react";
 
 
 declare module "@tiptap/core" {

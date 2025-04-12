@@ -1,5 +1,5 @@
 "use client"
-import { createElement, useState } from "react";
+import { useState } from "react";
 import {
     AlignCenterIcon,
     AlignJustifyIcon,
@@ -37,8 +37,6 @@ import {
 import { type Level } from "@tiptap/extension-heading";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Value } from "@radix-ui/react-select";
-import TextAlign from "@tiptap/extension-text-align";
 
 interface ToolbarButtonProps {
     onClick?: () => void;

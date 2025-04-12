@@ -33,7 +33,7 @@ export function Room({ children }: { children: ReactNode }) {
                 const list = await getUsers();
                 setUsers(list);
             } catch (error) {
-                toast.error('Failed to fetch users');
+                toast.error(`Failed to fetch users ${error}`);
             }
         },
         []

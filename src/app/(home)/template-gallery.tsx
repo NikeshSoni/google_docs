@@ -14,6 +14,7 @@ import {
 import { tamplate } from '@/constant/tamplates';
 import { api } from '../../../convex/_generated/api';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 
 export const TamplateGallery = () => {
@@ -74,9 +75,9 @@ export const TamplateGallery = () => {
                                     )}>
                                         <div>
                                             {/* Todo: Add proper Initial content */}
-                                            <img onClick={() => onTamplateClick(tamplate.lable, tamplate.initialContent)}
+                                            <Image onClick={() => onTamplateClick(tamplate.lable, tamplate.initialContent)}
                                                 className='size-full  hover:border-blue-500 rounded-sm border hover:bg-blue-50
-                                            transition flex flex-col items-center justify-center gap-y-4 bg-white' src={tamplate.imageUrl} />
+                                            transition flex flex-col items-center justify-center gap-y-4 bg-white' src={tamplate.imageUrl} alt={tamplate.lable} />
                                         </div>
                                         <p className='text-sm font-medium truncate'>
                                             {tamplate.lable}

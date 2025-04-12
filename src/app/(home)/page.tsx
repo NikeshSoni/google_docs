@@ -4,15 +4,8 @@ import { Navbar } from './navbar';
 import { TamplateGallery } from './template-gallery';
 import { usePaginatedQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
-import { Id } from '../../../convex/_generated/dataModel';
 import { DocumentsTable } from './documents-table';
 import { useSearchParam } from '@/hooks/use-search-params';
-
-interface Document {
-  _id: Id<"documents">;
-  _creationTime: number;
-  title: string;
-}
 
 const Home = () => {
 
