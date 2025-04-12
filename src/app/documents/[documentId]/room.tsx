@@ -11,12 +11,14 @@ import { FullScreenLoder } from "@/components/full-screen-loder";
 import { Id } from "../../../../convex/_generated/dataModel";
 import { getUsers, getDocuments } from "./action";
 import { toast } from "sonner";
+import { RIGHT_MARGIN_DEFAULT, LEFT_MARGIN_DEFAULT } from '@/constant/margin';
 
 
 type User = {
     id: string;
     name: string;
-    avatar: string
+    avatar: string;
+    color: string;
 }
 
 export function Room({ children }: { children: ReactNode }) {
@@ -78,7 +80,9 @@ export function Room({ children }: { children: ReactNode }) {
                 }))
             }}
         >
-            <RoomProvider id={params.documentId as string} initialStorage={{ leftMargin: 56, rightMargin: 56 }}>
+            <RoomProvider id={params.documentId as string}
+                initialStorage={{ leftMargin: LEFT_MARGIN_DEFAULT, rightMargin: RIGHT_MARGIN_DEFAULT }}
+            >
                 <ClientSideSuspense fallback={<FullScreenLoder label="Room Leading..." />}>
                     {children}
                 </ClientSideSuspense>

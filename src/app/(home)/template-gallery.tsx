@@ -74,7 +74,7 @@ export const TamplateGallery = () => {
                                     )}>
                                         <div>
                                             {/* Todo: Add proper Initial content */}
-                                            <img onClick={() => onTamplateClick(tamplate.lable, "")}
+                                            <img onClick={() => onTamplateClick(tamplate.lable, tamplate.initialContent)}
                                                 className='size-full  hover:border-blue-500 rounded-sm border hover:bg-blue-50
                                             transition flex flex-col items-center justify-center gap-y-4 bg-white' src={tamplate.imageUrl} />
                                         </div>

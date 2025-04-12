@@ -27,14 +27,22 @@ import { FontSizeExtention } from '../extentions/font-size';
 import { LingHeightExtension } from '../extentions/line-height';
 import { Ruler } from './ruler';
 import { Threads } from './threads';
+import { RIGHT_MARGIN_DEFAULT, LEFT_MARGIN_DEFAULT } from '@/constant/margin';
 
 
-const Editor = () => {
+interface EditorProps {
+  initialContent?: string | undefined
+}
 
-  const leftMargin = useStorage((root) => root.leftMargin)
-  const rightMargin = useStorage((root) => root.rightMargin)
+const Editor = ({ initialContent }: EditorProps) => {
 
-  const liveblocks = useLiveblocksExtension()
+  const leftMargin = useStorage((root) => root.leftMargin) ?? LEFT_MARGIN_DEFAULT;
+  const rightMargin = useStorage((root) => root.rightMargin) ?? RIGHT_MARGIN_DEFAULT;
+
+  const liveblocks = useLiveblocksExtension({
+    initialContent,
+    offlineSupport_experimental: true // this line load data faster 
+  })
 
   const { setEditor } = useEditorStore()
 
@@ -66,7 +74,7 @@ const Editor = () => {
     },
     editorProps: {
       attributes: {
-        style: `padding-left:${leftMargin ?? 56}px; padding-right:${rightMargin ?? 56}px;`,
+        style: `padding-left:${leftMargin}px; padding-right:${rightMargin}px;`,
         class: "focus:outline-none print:border-0 bg-white border border-[#C7C7C7] flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
       }
     },
@@ -107,7 +115,7 @@ const Editor = () => {
   })
 
   return (
-    <div className='size-full overflow-x-auto bg-[#F9FBFD] px-4 print:p-0 print:bg-white print:overflow-visable'>
+    <div className='size-full overflow-x-auto mt-3 bg-[#F9FBFD] px-4 print:p-0 print:bg-white print:overflow-visable'>
       <Ruler />
       <div className='min-w-max flex justify-center w-[816px] py-4 prient:py-0 mx-auto print:w-full print:min-w-0'>
         <EditorContent editor={editor} />

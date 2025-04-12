@@ -205,7 +205,7 @@ const ListButton = () => {
             <DropdownMenuTrigger asChild>
                 <button
                     className="h-7 min-w-7 mx-1 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
-                    <ListIcon className="size-6" />
+                    <ListIcon className="size-4" />
                 </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="p-1 flex flex-col gap-y-1 ">
@@ -260,7 +260,7 @@ const AlignButton = () => {
             <DropdownMenuTrigger asChild>
                 <button
                     className="h-7 min-w-7 mx-1 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm">
-                    <AlignLeftIcon className="size-6" />
+                    <AlignLeftIcon className="size-4" />
                 </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="p-1 flex flex-col gap-y-1 ">
@@ -325,11 +325,11 @@ const ImageButton = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="p-2.5 flex items-center gap-x-2 ">
                     <DropdownMenuItem onClick={onUpload}>
-                        <UploadIcon className="size-6 mr-2" />
+                        <UploadIcon className="size-4 mr-2" />
                         Upload
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
-                        <SearchIcon className="size-6 mr-2" />
+                        <SearchIcon className="size-4 mr-2" />
                         Paste image url
                     </DropdownMenuItem>
                 </DropdownMenuContent>
